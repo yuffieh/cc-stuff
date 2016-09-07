@@ -1,0 +1,173 @@
+
+
+To install the MongoDB binaries, issue the following command in a system shell:
+
+
+$ brew install mongodb
+
+
+
+
+Run MongoDB
+
+Create the data directory.
+Before you start MongoDB for the first time, create the directory to which the mongod process will write data. By default, the mongod process uses the /data/db directory. If you create a directory other than this one, you must specify that directory in the dbpath option when starting the mongod process later in this procedure.
+
+The following example command creates the default /data/db directory:
+
+sudo mkdir -p /data/db
+
+
+
+
+Set permissions for the data directory.
+Before running mongod for the first time, ensure that the user account running mongod has read and write permissions for the directory.
+
+
+If you want to view the current file permissions on a file or folder, change the directory to the folder containing the file or folder, and then run the ls -l command.
+
+
+
+Run MongoDB.
+To run MongoDB, run the mongod process at the system prompt. 
+If necessary, specify the path of the mongod or the data directory. 
+
+See the following examples.
+
+Run without specifying paths
+If your system PATH variable includes the location of the mongod binary and if you use the default data directory (i.e., /data/db), simply enter mongod at the system prompt:
+
+mongod
+Specify the path of the mongod
+If your PATH does not include the location of the mongod binary, enter the full path to the mongod binary at the system prompt:
+
+<path to binary>/mongod
+Specify the path of the data directory
+If you do not use the default data directory (i.e., /data/db), specify the path to the data directory using the --dbpath option:
+
+mongod --dbpath <path to data directory>
+
+
+$ cd ~
+$ pwd
+/Users/mkyong
+$ touch .bash_profile
+$ vim .bash_profile
+
+
+use VIM to add these 2 lines to .bash_profile
+
+export MONGO_PATH=/usr/local/mongodb
+export PATH=$PATH:$MONGO_PATH/bin
+
+
+To exit VIM hit escape then :wq
+##restart terminal
+
+$ mongo -version
+
+
+Think of Mongo Db as it's own server so...
+
+You run mongod in one terminal window.
+ And you should see it start up and listen on port whatever...
+
+Then you open a second terminal window...
+
+and you can now talk to the admin account on the mongo db server by typing
+
+$ mongo
+
+you should see it say connecting to test if that's working. 
+
+test is the default database or "collection" for startup
+
+now type
+
+$ db
+
+this shows the DB you are currently connected to 
+
+$ show dbs 
+
+shows your databases
+
+If you don’t want to use the default /data/db folder, just specify an alternate path with --dbpath when you start mongod
+
+$ mongod --dbpath /any-directory
+
+
+
+If u get this soft rlimit error it's not important on a dev environment
+ulimit -n 2048 && mongod; will fix it when u start mongo
+
+
+
+Begin using MongoDB.
+
+
+Before deploying MongoDB in a production environment, consider the Production Notes document.
+
+Later, to stop MongoDB, press Control+C in the terminal where the mongod instance is running.
+
+
+https://docs.mongodb.org/manual/mongo/
+
+
+Introduction
+
+The mongo shell is an interactive JavaScript interface to MongoDB. You can use the mongo shell to query and update data as well as perform administrative operations.
+
+The mongo shell is a component of the MongoDB distributions. Once you have installed and have started MongoDB, connect the mongo shell to your running MongoDB instance.
+
+Most examples in the MongoDB Manual use the mongo shell; however, many drivers provide similar interfaces to MongoDB.
+
+IMPORTANT
+Ensure that MongoDB is running before attempting to start the mongo shell.
+
+
+
+ start the mongo shell and connect to your MongoDB instance running on localhost with default port:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Example:
+If you want to create a database with name <mydb>, then use DATABASE statement would be as follows:
+
+>use mydb
+switched to db mydb
+To check your currently selected database use the command db
+
+>db
+mydb
+If you want to check your databases list, then use the command show dbs.
+
+>show dbs
+local     0.78125GB
+test      0.23012GB
+Your created database (mydb) is not present in list. To display database you need to insert atleast one document into it.
+
+>db.movie.insert({"name":"tutorials point"})
+>show dbs
+local      0.78125GB
+mydb       0.23012GB
+test       0.23012GB
+In mongodb default database is test. If you didn't create any database then collections will be stored in test database.

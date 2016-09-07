@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
+
+	<title>Mongo</title>
+
+	<!--  -->
+
+	<style>
+
+	</style>
+
+</head>
+
+<body>
+
+	<div class="container">
+
+        <h2>Mongo DB</h2>       
+        
+        <p>To install the MongoDB binaries, issue the following command in a system shell:</p>
+        
+      <pre>
+      
+      $ brew install mongodb
+      
+      </pre>  
+        
+
+
+<h2>Setup Mongo DB</h2>
+<p>Create a data directory.</p>
+ <p>Before you start MongoDB for the first time, create the directory to which the mongod process will write data.</p>       
+        
+        
+<p> By default, the mongod process uses the /data/db directory. If you create a directory other than this one, you must specify that directory in the dbpath option when starting the mongod process later in this procedure.</p>
+
+<p>The following example command creates the default /data/db directory:</p>
+
+<pre>
+
+sudo mkdir -p /data/db
+
+</pre>
+
+<h2>Set permissions for the data directory.</h2>
+
+
+<p>Before running mongod for the first time, ensure that the user account running mongod has read and write permissions for the data directory.</p>
+
+<p>If you want to view the current file permissions on a file or folder, change the directory to the folder containing the file or folder, and then run the $ls -l command.</p>
+
+
+<h2>Run MongoDB.</h2>
+
+<p>To run MongoDB, run the mongod process at the system prompt. 
+If necessary, specify the path of the mongod or the data directory. </p>
+
+<p>See the following examples.</p>
+
+<p>Run without specifying paths
+If your system PATH variable includes the location of the mongod binary and if you use the default data directory (i.e., /data/db), simply enter mongod at the system prompt:</p>
+
+<pre>mongod</pre>
+        
+<p>        
+Specify the path of the mongod
+If your PATH does not include the location of the mongod binary, enter the full path to the mongod binary at the system prompt:</p>
+
+<pre><path to binary>/mongod</pre>
+
+
+
+<p>Specify the path of the data directory
+If you do not use the default data directory (i.e., /data/db), specify the path to the data directory using the --dbpath option:</p>
+
+<pre>mongod --dbpath <path to data directory></pre>
+
+
+<pre>
+$ cd ~
+$ pwd
+/Users/youruser
+$ touch .bash_profile
+$ vim .bash_profile
+</pre>
+
+<p>
+use VIM to add these 2 lines to .bash_profile</p>
+
+<pre>
+
+export MONGO_PATH=/usr/local/mongodb
+export PATH=$PATH:$MONGO_PATH/bin
+
+</pre>
+
+
+<p>To exit VIM hit escape then :wq
+##restart terminal</p>
+
+<pre>$ mongo -version</pre>
+
+
+<p>Think of Mongo Db as it's own server so...
+
+You run mongod in one terminal window.
+ And you should see it start up and listen on port whatever...
+
+Then you open a second terminal window...
+
+and you can now talk to the admin account on the mongo db server by typing</p>
+
+<pre>$ mongo</pre>
+
+<p>this is called the mongo shell, you should see it say connecting to test if that's working. 
+
+test is the default database or "collection" for startup
+
+now type
+</p>
+<pre>$ db</pre>
+
+<p>this shows the DB you are currently connected to </p>
+
+<pre>$ dbs </pre>
+
+<p>shows your databases</p>
+
+<p>If you don’t want to use the default /data/db folder, just specify an alternate path with --dbpath</p>
+
+<pre>$ mongod --dbpath /any-directory</pre>
+
+<p>If u get this soft rlimit error it's not important on a dev environment
+ulimit -n 2048 && mongod; will fix it when u start mongo</p>
+
+<p>to see your databases</p>
+
+
+<h2>Begin using MongoDB.</h2>
+
+
+<p>Before deploying MongoDB in a production environment, consider the Production Notes document.</p>
+
+<p>Later, to stop MongoDB, press Control+C in the terminal where the mongod instance is running.</p>
+
+
+<p>https://docs.mongodb.org/manual/mongo/</p>
+
+
+<h3>Introduction</h3>
+
+<p>The mongo shell is an interactive JavaScript interface to MongoDB. You can use the mongo shell to query and update data as well as perform administrative operations.</p>
+
+<p>The mongo shell is a component of the MongoDB distributions. Once you have installed and have started MongoDB, connect the mongo shell to your running MongoDB instance.</p>
+
+<p>Most examples in the MongoDB Manual use the mongo shell; however, many drivers provide similar interfaces to MongoDB.</p>
+
+<h2>IMPORTANT</h2>
+<h3>Ensure that MongoDB is running before attempting to start the mongo shell.</h3>
+
+
+<p>
+ start the mongo shell and connect to your MongoDB instance running on localhost with default port:</p>
+
+
+
+<p>Example:
+If you want to create a database with name <mydb>, then use DATABASE statement would be as follows:</p>
+
+<pre>>use mydb
+switched to db mydb</pre>
+<p>To check your currently selected database use the command db</p>
+
+<pre>>db
+mydb</pre>
+<p>If you want to check your databases list, then use the command show dbs.</p>
+
+<pre>>show dbs
+local     0.78125GB
+test      0.23012GB</pre>
+<p>Your created database (mydb) is not present in list. To display database you need to insert atleast one document into it.</p>
+
+<pre>
+>db.movie.insert({"name":"tutorials point"})
+>show dbs
+local      0.78125GB
+mydb       0.23012GB
+test       0.23012GB
+</pre>
+<p>In mongodb default database is test. If you didn't create any databases then collections will be stored in test database.</p>
+        
+        
+        <br/><br/><br/><br/><br/>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+	</div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+	<script>
+	</script>
+
+</body>
+
+</html>
+
+
+
