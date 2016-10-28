@@ -14,7 +14,7 @@ rl.question('What  is your name? ', function(answer){
 });
 
 
-
+//what were we doing?
 
 
 //how to throw cats
